@@ -32,10 +32,9 @@ def connect():
     db.commit()
     return db
 
+
 @app.before_request
 def local_access():
-    if request.host not in ('127.0.0.1:5000', 'localhost:5000'):
-        return jsonify(error='Acesse pelo endereço local indicado no guia.'), 403
     if request.method in ('POST', 'PUT'):
         origin = request.headers.get('Origin')
         if origin and origin != request.host_url.rstrip('/'):
