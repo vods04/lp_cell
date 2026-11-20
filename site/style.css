@@ -436,7 +436,7 @@ dd {
         flex-direction:column;
         gap:3px
     }
-
+    
 }
 @media(max-width:640px) {
     aside {
@@ -486,7 +486,7 @@ dd {
     dl {
         grid-template-columns:1fr
     }
-
+    
 }
 @media print {
     body>* {
@@ -506,5 +506,5 @@ dd {
     dialog::backdrop {
         background:white
     }
-
+    
 }
