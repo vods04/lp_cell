@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>LPCell | Ordens de Serviço</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <aside>
+            <a class="brand" href="#">▣ <span>LP<span class="light">Cell</span>
+                    <small>ASSISTÊNCIA TÉCNICA</small>
+                </span>
+            </a>
+            <div class="navlabel">ÁREA DE TRABALHO</div>
+            <a href="#" class="nav active">▤ &nbsp; Ordens de serviço</a>
+            <div class="asidebottom">
+                <span class="dot"></span>
+                <br>
+                <small>Projeto Integrador II · 2026</small>
+            </div>
+        </aside>
+        <main>
+            <header>
+                <span>Gestão de atendimentos</span>
+                <span class="avatar">LP</span>
+            </header>
+            <div class="content">
+                <div class="heading">
+                    <div>
+                        <div class="eyebrow">CADA REPARO, ORGANIZADO.</div>
+                        <h1>Ordens de serviço</h1>
+                        <p>Do recebimento à entrega, tudo em um só lugar.</p>
+                    </div>
+                    <button class="primary" id="new">＋ Nova ordem</button>
+                </div>
+                <section class="stats" id="stats" aria-label="Resumo das ordens">
+                </section>
+                <section class="panel">
+                    <div class="toolbar">
+                        <div class="search">
+                            <span>⌕</span>
+                            <input id="search" aria-label="Buscar ordens" placeholder="Buscar por cliente, telefone ou nº da ordem...">
+                        </div>
+                        <select id="filter" aria-label="Filtrar por status">
+                            <option value="">Todos os status</option>
+                        </select>
+                        <button id="export">Exportar JSON</button>
+                    </div>
+                    <div class="tablewrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ORDEM / ENTRADA</th>
+                                    <th>CLIENTE</th>
+                                    <th>APARELHO</th>
+                                    <th>STATUS</th>
+                                    <th>VALOR</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="rows">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tablefoot">
+                        <span id="count"></span>
+                        <button onclick="location.reload()">Atualizar lista</button>
+                    </div>
+                </section>
+                <p class="footnote">Um atendimento bem registrado é mais fácil de encontrar.</p>
+            </div>
+        </main>
+        <dialog id="editor">
+            <form id="form">
+                <div class="modalhead">
+                    <div>
+                        <div class="eyebrow">ATENDIMENTO</div>
+                        <h2 id="formtitle">Nova ordem de serviço</h2>
+                    </div>
+                    <button type="button" class="close" aria-label="Fechar">×</button>
+                </div>
+                <p class="muted">Preencha os dados do atendimento. Campos com * são obrigatórios.</p>
+                <div class="grid">
+                    <label>Nome do cliente *<input name="client" required maxlength="120" placeholder="Nome completo">
+                    </label>
+                    <label>CPF do cliente (opcional)<input name="cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00">
+                        <small>Preencha somente quando necessário ao atendimento.</small>
+                    </label>
+                    <label>Telefone *<input name="phone" type="tel" required maxlength="25" placeholder="(19) 99999-0000">
+                    </label>
+                    <label>Data de entrada *<input name="date" type="date" required>
+                    </label>
+                    <label>Modelo do aparelho *<input name="device" required maxlength="120" placeholder="Marca e modelo">
+                    </label>
+                    <label>Atendente responsável *<input name="attendant" required maxlength="100" placeholder="Nome do atendente">
+                    </label>
+                    <label>Status<select name="status" id="status">
+                        </select>
+                    </label>
+                    <label class="wide">Problema informado *<textarea name="problem" required maxlength="2000" placeholder="Descreva o problema relatado pelo cliente">
+                        </textarea>
+                    </label>
+                    <label class="wide">Serviço a realizar<textarea name="service" maxlength="2000" placeholder="Preencha quando o serviço for definido">
+                        </textarea>
+                    </label>
+                    <label>Valor do serviço (R$)<input name="value" type="number" min="0" max="999999" step="0.01" placeholder="A definir">
+                    </label>
+                </div>
+                <p id="formerror" role="alert"></p>
+                <div class="actions">
+                    <button type="button" class="close">Cancelar</button>
+                    <button class="primary" type="submit">Salvar ordem</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="detail">
+            <div class="modalhead">
+                <div>
+                    <div class="eyebrow">DETALHES DO ATENDIMENTO</div>
+                    <h2 id="detailtitle"></h2>
+                </div>
+                <button class="close" aria-label="Fechar">×</button>
+            </div>
+            <div id="detailbody">
+            </div>
+            <div class="actions">
+                <button id="print">Imprimir</button>
+                <button id="edit" class="primary">Editar / atualizar status</button>
+            </div>
+        </dialog>
+        <div id="toast" role="status">
+        </div>
+        <script src="app.js">
+        </script>
+    </body>
+</html>

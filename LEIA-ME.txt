@@ -1,0 +1,68 @@
+LPCell — Projeto VS Code com banco SQLite
+
+COMO INICIAR NO WINDOWS
+1. Instale Python 3.10 ou superior, se ainda não tiver.
+2. Extraia o ZIP. No VS Code, abra a pasta LPCell_Banco (onde está server.py).
+3. Abra Terminal > Novo Terminal e execute, uma linha por vez:
+   py -m venv .venv
+   .venv\Scripts\python.exe -m pip install -r requirements.txt
+   .venv\Scripts\python.exe server.py
+4. Abra no navegador: http://127.0.0.1:5000
+5. Mantenha o terminal aberto. Para encerrar, pressione Ctrl+C.
+Nas próximas vezes, basta executar o último comando novamente.
+Se o comando py não existir, tente python no lugar de py.
+Não abra index.html diretamente nem use Live Server nesta versão.
+No macOS/Linux: python3 -m venv .venv; depois use .venv/bin/python nos comandos.
+
+O QUE MUDOU
+O JavaScript usa fetch para conversar com uma API Python/Flask.
+A API valida e salva cada ordem na tabela orders do banco SQLite.
+O banco dados/lpcell.db é criado automaticamente no primeiro início.
+Cadastro, consulta, edição e mudança de status usam esse banco.
+Os registros permanecem após fechar o navegador e reiniciar o servidor.
+A numeração é atribuída pelo banco, não pelo navegador.
+Atualizar lista recarrega as ordens salvas; não há atualização em tempo real.
+Uma edição desatualizada é recusada se outra janela já salvou alterações.
+
+ARQUIVOS
+server.py: servidor, validações, API e criação do banco.
+site/index.html: telas e campos.
+site/style.css: aparência.
+site/app.js: interação, busca, filtros, envio de dados à API.
+requirements.txt: dependência Flask.
+test_server.py: testes automatizados do servidor com banco temporário.
+
+BANCO E BACKUP
+Pare o servidor antes de copiar dados/lpcell.db para outro local seguro.
+Para restaurar, pare o servidor e substitua o arquivo pela cópia desejada.
+Não apague a pasta dados ao atualizar o código.
+O botão Exportar JSON exporta os registros carregados na tela; não importa arquivos.
+Registros da versão antiga no navegador NÃO são transferidos automaticamente.
+Mantenha o pacote anterior e seu JSON exportado caso já tenha cadastros.
+
+ESCOPO
+Versão local no computador em que o servidor é iniciado, sem nuvem ou login.
+Acesso limitado a 127.0.0.1. Use dados fictícios para avaliação acadêmica.
+Não basta arrastar esta pasta para Netlify: a API Python precisa de hospedagem
+com armazenamento persistente para uso online. Essa publicação não foi feita.
+Não há exclusão de ordens nem autenticação nesta versão.
+
+VERIFICAÇÃO
+Execute: .venv\Scripts\python.exe -m unittest -v
+Foram verificados por código: criação, edição, reabertura do banco, conflito
+entre edições, rejeição de valor negativo, bloqueio de origem externa e
+bloqueio de download do banco. A sintaxe JavaScript também foi verificada.
+Não foi executado teste visual em navegador nem avaliação com a loja.
+O grupo deve testar cadastro, busca, edição, fechamento/reabertura, impressão
+e registrar resultados reais no relatório. A implementação foi assistida por IA.
+
+REFERÊNCIA TÉCNICA
+https://flask.palletsprojects.com/en/stable/tutorial/database/
+
+CPF OPCIONAL
+Campo disponível no cadastro, edição, detalhes e impressão. Pode ficar vazio.
+Aceita 11 dígitos com ou sem pontuação e salva somente os dígitos no banco.
+Valida apenas formato; não verifica titularidade nem situação cadastral.
+Bancos antigos ganham a coluna cpf automaticamente, sem apagar ordens.
+CPF não aparece na lista geral; aparece nos detalhes e no JSON exportado.
+Colete somente quando necessário ao atendimento e proteja o banco e backups.
